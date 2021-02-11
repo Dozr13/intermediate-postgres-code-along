@@ -1,3 +1,90 @@
+1.
+CREATE TABLE movie (
+  movie_id SERIAL,
+  title TEXT,
+  media_type_id INTEGER,
+  FOREIGN KEY(media_type_id)
+  REFERENCES media_type(media_type_id)
+);
+
+INSERT INTO movie (title, media_type_id)
+  VALUES ('F8 of the Furious', 1);
+
+SELECT * FROM movie;
+
+
+
+2.
+ALTER TABLE movie
+  ADD COLUMN genre_id 
+  INTEGER REFERENCES genre(genre_id);
+
+SELECT * FROM movie;
+
+
+
+3.
+UPDATE movie
+  SET genre_id = 22
+  WHERE movie_id = 1;
+
+SELECT * FROM movie;
+
+
+
+4.
+SELECT al.title, ar.name
+  FROM album al
+  JOIN artist ar ON al.artist_id = ar.artist_id;
+
+
+5.
+SELECT * FROM track
+  WHERE genre_id IN (SELECT genre_id FROM genre
+                       WHERE name = 'Jazz'
+                       OR name = 'Blues');
+
+
+6.
+UPDATE employee
+  SET phone = null
+  WHERE employee_id = 1;
+
+SELECT * FROM employee
+  WHERE  employee_id = 1;
+
+
+7.
+SELECT * FROM customer
+  WHERE company IS null
+
+
+8.
+SELECT ar.artist_id, ar.name, COUNT(*)
+  FROM artist AS ar
+  JOIN album AS al ON ar.artist_id = al.artist_id
+  GROUP BY ar.artist_id
+  ORDER BY COUNT DESC;
+
+
+
+9.
+SELECT DISTINCT country FROM customer;
+
+
+10.
+SELECT * FROM customer WHERE fax IS null;
+
+DELETE FROM customer WHERE fax IS null;
+
+
+
+
+
+
+
+
+
 <img src="https://s3.amazonaws.com/devmountain/readme-logo.png" width="250" align="right">
 
 # Project Summary
